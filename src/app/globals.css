@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #00263b;
+
+  --color-navy: #00263b;
+  --color-gold: #ab9178;
+  --color-beige: #beb6ae;
+  --color-light: #f0f0f0;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-navy: var(--color-navy);
+  --color-gold: var(--color-gold);
+  --color-beige: var(--color-beige);
+  --color-light: var(--color-light);
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 1rem;
+  max-width: 1280px;
+
+  @media (width >= 40rem) {
+    padding-inline: 1.5rem;
+  }
+
+  @media (width >= 64rem) {
+    padding-inline: 3rem;
+    border-inline: 1px solid color-mix(in srgb, var(--color-gold) 70%, transparent);
+  }
+}
+
+.page-title {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 44px;
+  line-height: 1;
+}
+
+@media (min-width: 768px) {
+  .page-title {
+    font-size: 64px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .page-title {
+    font-size: 82px;
+  }
+}
+
+.khq-link {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  letter-spacing: 0.05em;
+  color: var(--color-gold);
+}
+
+.navy-link {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  letter-spacing: 0.05em;
+  color: var(--color-navy);
+}
+
+.arrow-line {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  transition: transform 0.3s;
+}
+
+.arrow-line .bar {
+  position: relative;
+  height: 1px;
+  width: 100%;
+  margin-right: -14px;
+}
+
+.arrow-line .head {
+  border-width: 0 1px 1px 0;
+  padding: 0.375rem;
+  transform: rotate(-45deg);
+}
+
+.group:hover .arrow-line {
+  transform: translateX(0.5rem);
+}
