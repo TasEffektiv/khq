@@ -25,7 +25,7 @@ export default function Header() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-40 h-16 w-full border-b border-gold/70 text-navy backdrop-blur-xl backdrop-saturate-150 transition-[background-color,box-shadow] duration-300 lg:h-24 ${
-        dense ? "bg-white/55 shadow-[0_8px_30px_-12px_rgba(0,38,59,0.25)]" : "bg-white/20"
+        dense ? "bg-white/95 shadow-[0_8px_30px_-12px_rgba(0,38,59,0.25)]" : "bg-white/20"
       }`}
     >
       <div className="container h-full !border-r-0 lg:!pr-0">
@@ -102,7 +102,7 @@ export default function Header() {
           </div>
 
           <div className="hidden h-full flex-col lg:flex lg:w-40">
-            <div className="flex basis-[40%] items-center justify-end px-2">
+            <div className="flex basis-[40%] items-center justify-end border-b border-gold px-2">
               <a
                 href="https://qsop.quickfee.com.au/#/company/quickfee/firm/ndkhq"
                 target="_blank"
@@ -112,7 +112,7 @@ export default function Header() {
                 PAYMENT PORTAL
               </a>
             </div>
-            <div className="relative h-full flex-1 border-t border-r border-gold">
+            <div className="relative h-full flex-1 border-r border-gold">
               <div className="absolute -top-px right-0 h-px w-96 translate-x-full bg-gold" />
               <button
                 type="button"
