@@ -50,7 +50,7 @@ export default function InsightsAlerts() {
               <li key={alert.id}>
                 <Link
                   href={alert.href}
-                  className="group flex items-start justify-between gap-6 py-5 first:pt-0"
+                  className="group flex items-start justify-between gap-6 py-5 first:pt-0 last:pb-0"
                 >
                   <div>
                     <time className="text-xs uppercase tracking-wide text-gold/80">{alert.date}</time>

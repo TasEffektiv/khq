@@ -1,7 +1,7 @@
 export default function InsightsPageHero() {
   return (
-    <div className="relative w-full overflow-hidden border-b border-gold bg-[url('/images/bg-swoosh.png')] bg-cover bg-center pt-24 lg:pt-32">
-      <div className="container pb-10 text-navy lg:pb-14">
+    <div className="relative w-full overflow-hidden border-b border-gold bg-[url('/images/bg-swoosh.png')] bg-cover bg-center pt-24">
+      <div className="container pb-10 pt-10 text-navy lg:pb-14 lg:pt-14">
         <div className="mb-3 flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-gold">
           <span className="size-2 rounded-full border border-current" />
           The KHQ Inner Circle

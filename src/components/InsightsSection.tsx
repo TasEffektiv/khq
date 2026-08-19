@@ -6,7 +6,7 @@ import { insights } from "@/lib/data";
 export default function InsightsSection() {
   return (
     <section className="container pb-10">
-      <SectionHeading>Latest News</SectionHeading>
+      <SectionHeading>Latest Insights</SectionHeading>
       <p className="max-w-2xl pt-4 text-navy/70 md:pt-2">
         Recent updates and alerts from the KHQ team, published as they happen.
       </p>
