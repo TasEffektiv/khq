@@ -1,47 +1,77 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
+import Link from "next/link";
 
 export default function SubscribeSection() {
   const [submitted, setSubmitted] = useState(false);
+  const emailId = useId();
 
   return (
-    <section className="relative z-10 w-full bg-beige">
+    <section id="subscribe" className="relative z-10 w-full border-t border-gold/40 bg-beige">
       <div className="container">
-        <div className="grid w-full items-start gap-x-4 border-b border-white py-10 md:flex">
-          <h2 className="font-serif text-2xl italic text-white md:basis-5/12 lg:translate-y-px lg:text-[32px]">
-            Subscribe:
-          </h2>
-          {submitted ? (
-            <p className="flex-1 text-white">Thanks for subscribing.</p>
-          ) : (
-            <form
-              className="flex flex-1 gap-4 text-white"
-              onSubmit={(e) => {
-                e.preventDefault();
-                setSubmitted(true);
-              }}
-            >
-              <input
-                type="email"
-                required
-                placeholder="Enter Your Email Here"
-                className="my-5 flex h-[32px] flex-1 items-center border-b border-current bg-transparent text-lg italic outline-none placeholder:text-white focus:border-b md:my-0 md:border-0 lg:h-[40px] lg:text-[22px]"
-              />
-              <button
-                type="submit"
-                className="group flex w-[120px] items-center gap-3 uppercase hover:text-navy lg:w-[160px]"
+        <div className="flex flex-col items-start gap-8 py-14 lg:flex-row lg:items-center lg:justify-between lg:gap-16 lg:py-20">
+          <div className="lg:max-w-[420px]">
+            <div className="mb-3 flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-gold">
+              <svg
+                viewBox="0 0 24 24"
+                className="h-4 w-4"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                aria-hidden
               >
-                <span>Submit</span>
-                <span className="flex w-full items-center transition-transform group-hover:translate-x-1">
-                  <span className="relative -mr-[14px] h-px w-full bg-current" />
-                  <span
-                    className="p-1.5 -rotate-45"
-                    style={{ borderWidth: "0 1px 1px 0", borderColor: "currentColor", borderStyle: "solid" }}
-                  />
-                </span>
-              </button>
-            </form>
+                <rect x="2.5" y="4.5" width="19" height="15" rx="1.5" />
+                <path d="M3 6l9 7 9-7" />
+              </svg>
+              Stay in the loop
+            </div>
+            <h2 className="font-serif text-[28px]/tight italic text-navy lg:text-[40px]/tight">
+              Subscribe to our insights
+            </h2>
+            <p className="mt-3 max-w-sm text-navy/70">
+              Get KHQ&apos;s legal insights and firm news delivered straight to your inbox.
+            </p>
+          </div>
+
+          {submitted ? (
+            <p className="text-lg text-navy lg:max-w-md">
+              Thanks for subscribing — check your inbox to confirm.
+            </p>
+          ) : (
+            <div className="w-full lg:max-w-md">
+              <form
+                className="flex flex-col gap-3 sm:flex-row"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  setSubmitted(true);
+                }}
+              >
+                <label htmlFor={emailId} className="sr-only">
+                  Email address
+                </label>
+                <input
+                  id={emailId}
+                  type="email"
+                  required
+                  placeholder="Enter your email address"
+                  className="h-[52px] flex-1 rounded-lg border border-white/60 bg-white/30 px-4 text-navy shadow-[0_8px_30px_-12px_rgba(0,38,59,0.15)] outline-none backdrop-blur-lg backdrop-saturate-150 placeholder:text-navy/50 focus:border-gold"
+                />
+                <button
+                  type="submit"
+                  className="flex h-[52px] shrink-0 items-center justify-center gap-3 rounded-lg bg-gold px-8 text-sm font-medium uppercase tracking-wide text-white transition-colors hover:bg-navy"
+                >
+                  Subscribe
+                </button>
+              </form>
+              <p className="mt-3 text-xs text-navy/50">
+                By subscribing you agree to our{" "}
+                <Link href="/privacy-policy" className="underline hover:text-navy">
+                  Privacy Policy
+                </Link>
+                . Unsubscribe anytime.
+              </p>
+            </div>
           )}
         </div>
       </div>

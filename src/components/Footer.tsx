@@ -18,7 +18,7 @@ const serviceLinks = [
     href: "https://qsop.quickfee.com.au/#/company/quickfee/firm/ndkhq",
     external: true,
   },
-  { label: "Subscribe", href: "/subscribe" },
+  { label: "Subscribe", href: "/#subscribe" },
 ];
 
 export default function Footer() {
