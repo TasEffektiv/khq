@@ -39,56 +39,181 @@ type NavItem = { label: string; href: string; dropdown?: { label: string; href: 
 
 export const mobileNav: NavItem[] = [{ label: "Home", href: "/" }, ...primaryNav];
 
-export const insights = [
+export type InsightCategory = "Alerts" | "Articles" | "Publications" | "Media Release";
+
+export const insightCategories: InsightCategory[] = ["Alerts", "Articles", "Publications", "Media Release"];
+
+export type Insight = {
+  id: number;
+  tag: InsightCategory;
+  division?: string;
+  date: string;
+  title: string;
+  excerpt: string;
+  image: string;
+  href: string;
+};
+
+// Ordered newest first — homepage and archive views both rely on this order.
+export const insights: Insight[] = [
+  {
+    id: 12,
+    tag: "Publications",
+    division: "Corporate & Commercial",
+    date: "18 August 2026",
+    title: "KHQ Deal Review: M&A and capital markets activity, H1 2026",
+    excerpt: "Our half-yearly review of M&A and capital markets activity across the sectors we act in.",
+    image: "/images/news/news-5.jpg",
+    href: "/blog/khq-deal-review-h1-2026",
+  },
   {
     id: 1,
-    tag: "News",
+    tag: "Alerts",
+    division: "Superannuation & Financial Services",
     date: "14 August 2026",
     title:
-      "Bill proposing extension of Superannuation Guarantee to workers under 18, ASIC propose to extend various legislative instrument",
-    image: "/images/news/news-1.jpg",
+      "Super Alert – 14 August 2026: Bill proposing extension of Superannuation Guarantee to workers under 18, ASIC propose to extend various legislative instrument",
+    excerpt:
+      "A wrap of the latest superannuation guarantee reforms and regulatory instruments moving through Parliament this fortnight.",
+    image: "/images/insight-1.png",
     href: "/blog/super-alert-14-august-2026",
   },
   {
+    id: 7,
+    tag: "Articles",
+    division: "Family & Relationship Law",
+    date: "12 August 2026",
+    title: "Coercive control and the family law system: what the reforms mean for separating couples",
+    excerpt:
+      "A look at how recent coercive control reforms are reshaping property and parenting outcomes in the family courts.",
+    image: "/images/news/news-2.jpg",
+    href: "/blog/coercive-control-family-law-reforms",
+  },
+  {
+    id: 14,
+    tag: "Media Release",
+    date: "8 August 2026",
+    title: "KHQ Lawyers recognised across 14 practice areas in Chambers Asia Pacific 2027",
+    excerpt:
+      "KHQ Lawyers and its people have been ranked across fourteen practice areas in the newly released Chambers Asia Pacific guide.",
+    image: "/images/about-1.jpg",
+    href: "/blog/khq-chambers-asia-pacific-2027",
+  },
+  {
     id: 2,
-    tag: "News",
+    tag: "Alerts",
+    division: "Superannuation & Financial Services",
     date: "7 August 2026",
     title:
-      "ATO law companion rulings on the Payday Super reforms, AFCA reported a record number of complaints in 2025-26",
-    image: "/images/news/news-2.jpg",
+      "Super Alert – 7 August 2026: ATO law companion rulings on the Payday Super reforms, AFCA reported a record number of complaints in 2025-26",
+    excerpt: "The ATO's latest guidance on Payday Super, plus what a record AFCA complaint year means for trustees.",
+    image: "/images/insight-2.png",
     href: "/blog/super-alert-7-august-2026",
   },
   {
+    id: 9,
+    tag: "Articles",
+    division: "Workplace Relations & Safety",
+    date: "5 August 2026",
+    title: "Psychosocial hazards: what regulators are actually enforcing in 2026",
+    excerpt:
+      "A practical rundown of where WHS regulators are focusing psychosocial hazard enforcement this year, and how employers should respond.",
+    image: "/images/news/news-6.jpg",
+    href: "/blog/psychosocial-hazards-enforcement-2026",
+  },
+  {
+    id: 11,
+    tag: "Articles",
+    division: "Food & Beverage",
+    date: "3 August 2026",
+    title: "Hydration and wellness claims under the microscope: labelling risk for F&B brands",
+    excerpt:
+      "Regulators are scrutinising hydration and wellness marketing claims — here's where the line sits for food and beverage brands.",
+    image: "/images/news/news-4.jpg",
+    href: "/blog/hydration-wellness-claims-labelling-risk",
+  },
+  {
     id: 3,
-    tag: "News",
+    tag: "Alerts",
+    division: "Superannuation & Financial Services",
     date: "31 July 2026",
-    title: "ATO guidance re Member Verification Requests and Superstream NPP register guidance release",
-    image: "/images/news/news-3.jpg",
+    title: "Super Alert – 31 July 2026: ATO guidance re Member Verification Requests and Superstream NPP register guidance release",
+    excerpt:
+      "New ATO guidance on member verification and the Superstream NPP register, explained for trustees and administrators.",
+    image: "/images/insight-1.png",
     href: "/blog/super-alert-31-july-2026",
   },
   {
+    id: 8,
+    tag: "Articles",
+    division: "Family & Relationship Law",
+    date: "29 July 2026",
+    title: "AI in the family courts: evidence, disclosure and the risks of getting it wrong",
+    excerpt:
+      "As AI-generated material starts turning up in family law disputes, courts are drawing new lines around disclosure and reliability.",
+    image: "/images/news/news-3.jpg",
+    href: "/blog/ai-family-courts-evidence",
+  },
+  {
     id: 4,
-    tag: "News",
+    tag: "Alerts",
+    division: "Superannuation & Financial Services",
     date: "24 July 2026",
-    title: "Lost Super Enquiry guidance, ASIC announces record enforcement period in 2025-26",
-    image: "/images/news/news-4.jpg",
+    title: "Super Alert – 24 July 2026: Lost Super Enquiry guidance, ASIC announces record enforcement period in 2025-26",
+    excerpt: "ASIC's record enforcement year and updated guidance for handling lost super enquiries.",
+    image: "/images/insight-2.png",
     href: "/blog/super-alert-24-july-2026",
   },
   {
+    id: 10,
+    tag: "Articles",
+    division: "Workplace Relations & Safety",
+    date: "22 July 2026",
+    title: "Right to disconnect, twelve months on: lessons from the first wave of disputes",
+    excerpt: "What the first round of right to disconnect disputes has revealed about drafting workable workplace policies.",
+    image: "/images/news/news-1.jpg",
+    href: "/blog/right-to-disconnect-one-year-on",
+  },
+  {
+    id: 15,
+    tag: "Media Release",
+    date: "20 July 2026",
+    title: "KHQ Lawyers welcomes two new Principals to the Superannuation & Financial Services team",
+    excerpt:
+      "KHQ Lawyers continues to grow its market-leading Superannuation & Financial Services practice with two new Principal appointments.",
+    image: "/images/about-2.jpg",
+    href: "/blog/khq-welcomes-new-principals-super-team",
+  },
+  {
     id: 5,
-    tag: "News",
+    tag: "Alerts",
+    division: "Superannuation & Financial Services",
     date: "17 July 2026",
-    title: "ASIC & APRA updated statements of intent, ATO guidance on SuperStream release authority lodgments",
-    image: "/images/news/news-5.jpg",
+    title:
+      "Super Alert – 17 July 2026: ASIC & APRA updated statements of intent, ATO guidance on SuperStream release authority lodgments",
+    excerpt: "ASIC and APRA refresh their joint statement of intent, and the ATO clarifies SuperStream release authority lodgments.",
+    image: "/images/insight-1.png",
     href: "/blog/super-alert-17-july-2026",
   },
   {
     id: 6,
-    tag: "News",
+    tag: "Alerts",
+    division: "Superannuation & Financial Services",
     date: "10 July 2026",
-    title: "APRA consultation re super reporting standards, ASIC legislative instrument for IDPS operators",
-    image: "/images/news/news-6.jpg",
+    title: "Super Alert – 10 July 2026: APRA consultation re super reporting standards, ASIC legislative instrument for IDPS operators",
+    excerpt: "APRA opens consultation on new reporting standards while ASIC issues a fresh legislative instrument for IDPS operators.",
+    image: "/images/insight-2.png",
     href: "/blog/super-alert-10-july-2026",
+  },
+  {
+    id: 13,
+    tag: "Publications",
+    division: "Construction, Infrastructure & Energy",
+    date: "1 July 2026",
+    title: "Security of Payment guide: 2026 update for principals and contractors",
+    excerpt: "Our annual guide to security of payment regimes across Australian jurisdictions, updated for 2026.",
+    image: "/images/news/news-3.jpg",
+    href: "/blog/security-of-payment-guide-2026",
   },
 ];
 
