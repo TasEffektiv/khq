@@ -4,42 +4,101 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import SectionHeading from "./SectionHeading";
-import { insights, insightCategories, type InsightCategory } from "@/lib/data";
+import FilterDropdown from "./FilterDropdown";
+import { insights, insightCategories, insightDivisions, type InsightCategory } from "@/lib/data";
 
 const PAGE_SIZE = 6;
 
 export default function InsightsArchive() {
   const [category, setCategory] = useState<InsightCategory | "All">("All");
+  const [division, setDivision] = useState<string>("All");
+  const [search, setSearch] = useState("");
   const [visible, setVisible] = useState(PAGE_SIZE);
+  const [appliedFilters, setAppliedFilters] = useState({ category, division, search });
 
-  const filtered = category === "All" ? insights : insights.filter((post) => post.tag === category);
+  if (
+    appliedFilters.category !== category ||
+    appliedFilters.division !== division ||
+    appliedFilters.search !== search
+  ) {
+    setAppliedFilters({ category, division, search });
+    setVisible(PAGE_SIZE);
+  }
+
+  const filtered = insights.filter((post) => {
+    if (category !== "All" && post.tag !== category) return false;
+    if (division !== "All" && post.division !== division) return false;
+    if (search) {
+      const q = search.toLowerCase();
+      if (!post.title.toLowerCase().includes(q) && !post.excerpt.toLowerCase().includes(q)) return false;
+    }
+    return true;
+  });
   const shown = filtered.slice(0, visible);
 
   function selectCategory(next: InsightCategory | "All") {
     setCategory(next);
-    setVisible(PAGE_SIZE);
   }
 
   return (
     <section id="archive" className="container scroll-mt-20 pb-16 pt-4 lg:scroll-mt-28 lg:pb-24">
       <SectionHeading>Browse all insights</SectionHeading>
 
-      <div className="mt-6 flex flex-wrap gap-3 lg:mt-8">
-        {(["All", ...insightCategories] as const).map((cat) => (
-          <button
-            key={cat}
-            type="button"
-            onClick={() => selectCategory(cat)}
-            className={`rounded-full border px-4 py-1.5 text-xs uppercase tracking-wide transition-colors ${
-              category === cat
-                ? "border-gold bg-gold text-white"
-                : "border-navy/20 text-navy/70 hover:border-gold hover:text-gold"
-            }`}
+      <div className="mt-6 flex flex-col gap-4 lg:mt-8 lg:flex-row lg:items-center lg:justify-between">
+        <div className="flex flex-wrap items-center gap-3">
+          {(["All", ...insightCategories] as const).map((cat) => (
+            <button
+              key={cat}
+              type="button"
+              onClick={() => selectCategory(cat)}
+              className={`rounded-full border px-4 py-1.5 text-xs uppercase tracking-wide transition-colors ${
+                category === cat
+                  ? "border-gold bg-gold text-white"
+                  : "border-navy/20 text-navy/70 hover:border-gold hover:text-gold"
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+
+          <FilterDropdown
+            label="Expertise"
+            value={division}
+            options={["All", ...insightDivisions]}
+            onChange={setDivision}
+          />
+        </div>
+
+        <div className="relative w-full lg:max-w-xs">
+          <input
+            type="search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search insights..."
+            className="w-full rounded-full border border-navy/20 bg-white/50 px-4 py-1.5 pr-9 text-sm text-navy placeholder-navy/40 outline-none transition-colors focus:border-gold"
+          />
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={1.5}
+            className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-navy/40"
           >
-            {cat}
-          </button>
-        ))}
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+            />
+          </svg>
+        </div>
       </div>
+
+      {search && (
+        <p className="mt-6 text-sm text-navy/60">
+          Showing results for &ldquo;{search}&rdquo; — {filtered.length}{" "}
+          {filtered.length === 1 ? "result" : "results"}
+        </p>
+      )}
 
       <div className="mt-10 grid grid-cols-1 gap-x-10 gap-y-10 md:grid-cols-3 lg:gap-x-16">
         {shown.map((post) => (
@@ -74,7 +133,7 @@ export default function InsightsArchive() {
       </div>
 
       {shown.length === 0 && (
-        <p className="mt-10 text-navy/60">No insights in this category yet — check back soon.</p>
+        <p className="mt-10 text-navy/60">No insights match these filters — try broadening your search.</p>
       )}
 
       {visible < filtered.length && (

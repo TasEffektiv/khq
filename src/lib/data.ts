@@ -75,7 +75,7 @@ export const insights: Insight[] = [
       "Super Alert – 14 August 2026: Bill proposing extension of Superannuation Guarantee to workers under 18, ASIC propose to extend various legislative instrument",
     excerpt:
       "A wrap of the latest superannuation guarantee reforms and regulatory instruments moving through Parliament this fortnight.",
-    image: "/images/insight-1.png",
+    image: "/images/alerts/alert-1.jpg",
     href: "/blog/super-alert-14-august-2026",
   },
   {
@@ -107,7 +107,7 @@ export const insights: Insight[] = [
     title:
       "Super Alert – 7 August 2026: ATO law companion rulings on the Payday Super reforms, AFCA reported a record number of complaints in 2025-26",
     excerpt: "The ATO's latest guidance on Payday Super, plus what a record AFCA complaint year means for trustees.",
-    image: "/images/insight-2.png",
+    image: "/images/alerts/alert-2.jpg",
     href: "/blog/super-alert-7-august-2026",
   },
   {
@@ -140,7 +140,7 @@ export const insights: Insight[] = [
     title: "Super Alert – 31 July 2026: ATO guidance re Member Verification Requests and Superstream NPP register guidance release",
     excerpt:
       "New ATO guidance on member verification and the Superstream NPP register, explained for trustees and administrators.",
-    image: "/images/insight-1.png",
+    image: "/images/alerts/alert-3.jpg",
     href: "/blog/super-alert-31-july-2026",
   },
   {
@@ -161,7 +161,7 @@ export const insights: Insight[] = [
     date: "24 July 2026",
     title: "Super Alert – 24 July 2026: Lost Super Enquiry guidance, ASIC announces record enforcement period in 2025-26",
     excerpt: "ASIC's record enforcement year and updated guidance for handling lost super enquiries.",
-    image: "/images/insight-2.png",
+    image: "/images/alerts/alert-4.jpg",
     href: "/blog/super-alert-24-july-2026",
   },
   {
@@ -192,7 +192,7 @@ export const insights: Insight[] = [
     title:
       "Super Alert – 17 July 2026: ASIC & APRA updated statements of intent, ATO guidance on SuperStream release authority lodgments",
     excerpt: "ASIC and APRA refresh their joint statement of intent, and the ATO clarifies SuperStream release authority lodgments.",
-    image: "/images/insight-1.png",
+    image: "/images/alerts/alert-5.jpg",
     href: "/blog/super-alert-17-july-2026",
   },
   {
@@ -202,7 +202,7 @@ export const insights: Insight[] = [
     date: "10 July 2026",
     title: "Super Alert – 10 July 2026: APRA consultation re super reporting standards, ASIC legislative instrument for IDPS operators",
     excerpt: "APRA opens consultation on new reporting standards while ASIC issues a fresh legislative instrument for IDPS operators.",
-    image: "/images/insight-2.png",
+    image: "/images/alerts/alert-6.jpg",
     href: "/blog/super-alert-10-july-2026",
   },
   {
@@ -216,6 +216,10 @@ export const insights: Insight[] = [
     href: "/blog/security-of-payment-guide-2026",
   },
 ];
+
+export const insightDivisions = expertiseAreas
+  .map((area) => area.label)
+  .filter((label) => insights.some((post) => post.division === label));
 
 export const testimonials = [
   {

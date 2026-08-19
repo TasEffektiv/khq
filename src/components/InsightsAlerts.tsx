@@ -45,20 +45,14 @@ export default function InsightsAlerts() {
             </div>
           </div>
 
-          <ul className="flex-1 divide-y divide-white/15 lg:max-w-[640px]">
+          <ul className="flex-1 divide-y divide-white/15">
             {alerts.map((alert) => (
               <li key={alert.id}>
-                <Link
-                  href={alert.href}
-                  className="group flex items-start justify-between gap-6 py-5 first:pt-0 last:pb-0"
-                >
-                  <div>
-                    <time className="text-xs uppercase tracking-wide text-gold/80">{alert.date}</time>
-                    <p className="mt-1.5 text-base/snug text-white/90 group-hover:text-white">
-                      {alert.title.replace(/^Super Alert\s*–\s*\d+\s\w+\s\d{4}:\s*/, "")}
-                    </p>
-                  </div>
-                  <span className="mt-1 shrink-0 -rotate-45 p-1.5 text-gold transition-transform group-hover:translate-x-1" style={{ borderWidth: "0 1px 1px 0", borderColor: "currentColor", borderStyle: "solid" }} />
+                <Link href={alert.href} className="group block py-5 first:pt-0 last:pb-0">
+                  <time className="text-xs uppercase tracking-wide text-gold/80">{alert.date}</time>
+                  <p className="mt-1.5 text-base/snug text-white/90 group-hover:text-white group-hover:underline">
+                    {alert.title.replace(/^Super Alert\s*–\s*\d+\s\w+\s\d{4}:\s*/, "")}
+                  </p>
                 </Link>
               </li>
             ))}

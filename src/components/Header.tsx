@@ -1,16 +1,20 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import WordmarkLogo from "./WordmarkLogo";
 import { primaryNav, mobileNav } from "@/lib/data";
 import { openEnquireModal } from "./EnquireButton";
+
+const DARK_HERO_ROUTES = ["/insights"];
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [desktopSearchOpen, setDesktopSearchOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -20,14 +24,15 @@ export default function Header() {
   }, []);
 
   const dense = scrolled || mobileOpen;
+  const hasDarkHero = DARK_HERO_ROUTES.some((route) => pathname === route || pathname.startsWith(`${route}/`));
   const [about, ourPeople, expertise, insights, chinaAlliance] = primaryNav;
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-40 h-16 w-full border-b text-navy transition-[background-color,box-shadow,border-color,backdrop-filter] duration-300 lg:h-24 ${
+      className={`fixed inset-x-0 top-0 z-40 h-16 w-full border-b transition-[background-color,box-shadow,border-color,backdrop-filter,color] duration-300 lg:h-24 ${
         dense
-          ? "border-gold/70 bg-white/55 shadow-[0_8px_30px_-12px_rgba(0,38,59,0.25)] backdrop-blur-2xl backdrop-saturate-150"
-          : "border-gold bg-transparent"
+          ? "border-gold/70 bg-white/55 text-navy shadow-[0_8px_30px_-12px_rgba(0,38,59,0.25)] backdrop-blur-2xl backdrop-saturate-150"
+          : `border-gold bg-transparent ${hasDarkHero ? "text-white" : "text-navy"}`
       }`}
     >
       <div className="container h-full !border-r-0 lg:!pr-0">
@@ -70,34 +75,41 @@ export default function Header() {
               <nav className="flex h-full flex-1 items-center justify-end gap-8 px-7 text-sm font-medium">
                 <NavCell item={about} />
                 <NavCell item={ourPeople} />
-                <div className="group relative flex items-center gap-5">
-                  <Link href={expertise.href} className="flex items-center gap-2">
-                    <span className="size-2 rounded-full border border-current group-hover:bg-current" />
-                    {expertise.label}
-                  </Link>
+                <div className="flex items-center gap-5">
+                  <div className="group relative flex items-center">
+                    <Link href={expertise.href} className="flex items-center gap-2">
+                      <span className="size-2 rounded-full border border-current group-hover:bg-current" />
+                      {expertise.label}
+                    </Link>
+                    {expertise.dropdown && (
+                      <div className="invisible absolute left-0 top-full pt-2 opacity-0 transition-all group-hover:visible group-hover:opacity-100">
+                        <ul className="min-w-[280px] bg-white text-sm text-navy shadow-lg">
+                          {expertise.dropdown.map((child) => (
+                            <li
+                              key={child.label}
+                              className="border-b border-navy/5 py-1.5 first:pt-3.5 last:border-0 last:pb-3.5"
+                            >
+                              <Link href={child.href} className="block whitespace-nowrap px-4 py-1 hover:text-gold">
+                                {child.label}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
                   <Link href={insights.href} className="flex items-center gap-2">
                     <span className="size-2 rounded-full border border-current" />
                     {insights.label}
                   </Link>
-                  <Link href={chinaAlliance.href} className="whitespace-nowrap text-xs text-navy/70 hover:text-gold">
+                  <Link
+                    href={chinaAlliance.href}
+                    className={`whitespace-nowrap text-xs hover:text-gold ${
+                      dense ? "text-navy/70" : hasDarkHero ? "text-white/70" : "text-navy/70"
+                    }`}
+                  >
                     {chinaAlliance.label}
                   </Link>
-                  {expertise.dropdown && (
-                    <div className="invisible absolute left-0 top-full pt-2 opacity-0 transition-all group-hover:visible group-hover:opacity-100">
-                      <ul className="min-w-[280px] bg-white text-sm shadow-lg">
-                        {expertise.dropdown.map((child) => (
-                          <li
-                            key={child.label}
-                            className="border-b border-navy/5 py-1.5 first:pt-3.5 last:border-0 last:pb-3.5"
-                          >
-                            <Link href={child.href} className="block whitespace-nowrap px-4 py-1 hover:text-gold">
-                              {child.label}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
                 </div>
               </nav>
             </div>
@@ -219,7 +231,7 @@ function NavCell({ item }: { item: (typeof primaryNav)[number] }) {
       </Link>
       {item.dropdown && (
         <div className="invisible absolute left-0 top-full pt-2 opacity-0 transition-all group-hover:visible group-hover:opacity-100">
-          <ul className="min-w-[280px] bg-white text-sm shadow-lg">
+          <ul className="min-w-[280px] bg-white text-sm text-navy shadow-lg">
             {item.dropdown.map((child) => (
               <li key={child.label} className="border-b border-navy/5 py-1.5 first:pt-3.5 last:border-0 last:pb-3.5">
                 <Link href={child.href} className="block whitespace-nowrap px-4 py-1 hover:text-gold">
