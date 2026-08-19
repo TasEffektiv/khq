@@ -24,8 +24,10 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-40 h-16 w-full border-b border-gold/70 text-navy backdrop-blur-xl backdrop-saturate-150 transition-[background-color,box-shadow] duration-300 lg:h-24 ${
-        dense ? "bg-white/95 shadow-[0_8px_30px_-12px_rgba(0,38,59,0.25)]" : "bg-white/20"
+      className={`fixed inset-x-0 top-0 z-40 h-16 w-full border-b border-white/40 text-navy backdrop-blur-2xl backdrop-saturate-150 transition-[background-color,box-shadow,border-color] duration-300 lg:h-24 ${
+        dense
+          ? "border-gold/70 bg-white/55 shadow-[0_8px_30px_-12px_rgba(0,38,59,0.25)]"
+          : "bg-white/15"
       }`}
     >
       <div className="container h-full !border-r-0 lg:!pr-0">

@@ -11,8 +11,11 @@ export default function InsightsSection() {
 
       <div className="grid grid-cols-1 gap-x-10 gap-y-10 py-10 md:grid-cols-3 lg:gap-x-20 lg:py-14">
         {insights.map((post) => (
-          <article key={post.id} className="group relative flex w-full flex-col gap-5 lg:gap-7">
-            <div className="aspect-[4/3] overflow-hidden rounded-xl">
+          <article
+            key={post.id}
+            className="group relative flex w-full flex-col gap-5 rounded-xl border border-white/60 bg-white/20 p-4 shadow-[0_8px_30px_-12px_rgba(0,38,59,0.15)] backdrop-blur-lg backdrop-saturate-150 transition-colors duration-300 hover:bg-white/35 lg:gap-7 lg:p-5"
+          >
+            <div className="aspect-[4/3] overflow-hidden rounded-lg">
               <Image
                 src={post.image}
                 alt={post.title}

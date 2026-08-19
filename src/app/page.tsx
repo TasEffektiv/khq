@@ -12,9 +12,7 @@ export default function Home() {
     <main>
       <Hero />
 
-      <div
-        className="relative overflow-clip bg-gradient-to-b from-white via-white via-15% to-50%"
-      >
+      <div className="relative overflow-clip bg-[url('/images/bg-swoosh.png')] bg-cover bg-center">
         <AboutSection />
 
         <PullQuote>
